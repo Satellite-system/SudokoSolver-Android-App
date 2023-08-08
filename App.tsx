@@ -1,69 +1,35 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-import type {PropsWithChildren} from 'react';
+/* eslint-disable prettier/prettier */
+/* eslint-disable react-native/no-inline-styles */
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
+  Switch,
 } from 'react-native';
 
 import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
+  Colors
 } from 'react-native/Libraries/NewAppScreen';
+import SingleElement from './src/Components/SingleElement';
+import Header from './src/Components/Header';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
 
 function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const toggleSwitch = () =>{ setIsDarkMode(previousState => !previousState), console.log('Tapped') }
+
+  // const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView style={backgroundStyle,{height: "100%"}}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
@@ -71,26 +37,233 @@ function App(): JSX.Element {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+        <Header isDarkMode={isDarkMode}/>
+        <Switch
+          trackColor={{false: '#767577', true: '#81b0ff'}}
+          thumbColor={isDarkMode ? '#f5dd4b' : '#f4f3f4'}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleSwitch}
+          value={isDarkMode}
+          style={{marginTop: 20, height: 25, marginBottom: 25, backgroundColor:'#222'}}
+        />
+        {/* <RenderSudoko /> */}
+        <View style={{flex: 1, display: 'flex', flexDirection: 'row', marginHorizontal: 15 }}>
+          <View style={{flex: 1, display: 'flex', flexDirection: 'column'}}>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                borderWidth: 2,
+                borderColor: isDarkMode ? 'white' : 'black',
+                // width: '30%',
+              }}>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode}  />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+            </View>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                borderWidth: 2,
+                borderColor: isDarkMode ? 'white' : 'black',
+              }}>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+            </View>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                borderWidth: 2,
+                borderColor: isDarkMode ? 'white' : 'black',
+              }}>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+            </View>
+          </View>
+          <View style={{flex: 1, display: 'flex', flexDirection: 'column'}}>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                borderWidth: 2,
+                borderColor: isDarkMode ? 'white' : 'black',
+              }}>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+            </View>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                borderWidth: 2,
+                borderColor: isDarkMode ? 'white' : 'black',
+              }}>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+            </View>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                borderWidth: 2,
+                borderColor: isDarkMode ? 'white' : 'black',
+              }}>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+            </View>
+          </View>
+          <View style={{flex: 1, display: 'flex', flexDirection: 'column'}}>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                borderWidth: 2,
+                borderColor: isDarkMode ? 'white' : 'black',
+              }}>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+            </View>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                borderWidth: 2,
+                borderColor: isDarkMode ? 'white' : 'black',
+              }}>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+            </View>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                borderWidth: 2,
+                borderColor: isDarkMode ? 'white' : 'black',
+              }}>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+              <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                <SingleElement value="1" isDarkMode={isDarkMode} />
+                <SingleElement value="2" isDarkMode={isDarkMode} />
+                <SingleElement value="3" isDarkMode={isDarkMode} />
+              </View>
+            </View>
+          </View>
         </View>
+
       </ScrollView>
     </SafeAreaView>
   );

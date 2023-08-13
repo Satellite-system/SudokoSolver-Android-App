@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
@@ -17,6 +18,7 @@ const Algo = ({isDarkMode}) => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
   ]);
+  const [process, setProcess] = useState(false);
 
 //   Update grid Value
 const handleCellChange = (row, col, newValue) => {
@@ -45,17 +47,17 @@ const handleCellChange = (row, col, newValue) => {
         }
       }
     }
-
     return true;
   };
 
   const solveSudoku = () => {
+    setProcess(true);
     for (let row = 0; row < N; row++) {
       for (let col = 0; col < N; col++) {
         if (grid[row][col] === 0) {
           for (let num = 1; num <= 9; num++) {
             if (isPossible(row, col, num)) {
-              grid[row][col] = num;
+              handleCellChange(row, col, num);
               if (solveSudoku()) {
                 return true;
               }
@@ -63,31 +65,37 @@ const handleCellChange = (row, col, newValue) => {
             //   grid[row][col] = 0;
             }
           }
-          console.log("False");
+          setProcess(false);
+          console.log('False');
           return false;
         }
       }
     }
     console.log(grid);
+    setProcess(false);
     return true;
   };
 
-//   useEffect(() => {
-//     solveSudoku();
-//     // Now 'grid' contains the solved Sudoku puzzle
-//     console.log(grid);
-
-//   });
+  const clearScreen = ()=>{
+    for (let i = 0; i < 9; i++){
+      for (let j = 0; j < 9; j++){
+        handleCellChange(i,j,0);
+      }
+    }
+  }
 
   return (
     <View style={styles.container}>
       {/* Display the Sudoku grid visually */}
-      <Button onPress={solveSudoku} title="Solve" />
+      <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '70%' }}>
+        <Button onPress={clearScreen} title="Clear" />
+        <Button onPress={solveSudoku} title={process ? 'Solving...' : 'Solve'} />
+      </View>
       <View style={{height:30, width: '100%'}} />
       {grid.map((row, rowIndex) => (
         <View key={rowIndex} style={styles.row}>
           {row.map((cellValue, colIndex) => (
-            <View key={colIndex} style={styles.cell,{height: 50}}>
+            <View key={colIndex} style={styles.cell}>
               {/* <Text style={{color: '#000'}}>{cellValue}</Text> */}
               <SingleElement value={cellValue} isDarkMode={isDarkMode} handleCellChange={handleCellChange} rowIndex={rowIndex} colIndex={colIndex} />
               {/* {console.log(cellValue)} */}
@@ -95,6 +103,8 @@ const handleCellChange = (row, col, newValue) => {
           ))}
         </View>
       ))}
+
+      {/* <Text style={{color: isDarkMode ? 'white' : 'black', fontSize: 16, marginTop: 10}}>Solving....</Text> */}
     </View>
   );
 };
@@ -109,10 +119,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   cell: {
-    width: 30,
-    height: 30,
-    borderWidth: 1,
-    borderColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
   },

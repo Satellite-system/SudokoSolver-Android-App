@@ -16,6 +16,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import SingleElement from './src/Components/SingleElement';
 import Header from './src/Components/Header';
+import ImageHandler from './src/Components/ImageHandler';
 
 
 function App(): JSX.Element {
@@ -47,8 +48,8 @@ function App(): JSX.Element {
           style={{marginTop: 20, height: 25, marginBottom: 25, backgroundColor:'#222'}}
         />
         {/* <RenderSudoko /> */}
-        <View style={{flex: 1, display: 'flex', flexDirection: 'row', marginHorizontal: 15 }}>
-          <View style={{flex: 1, display: 'flex', flexDirection: 'column'}}>
+        {/* <View style={{flex: 1, display: 'flex', flexDirection: 'row', marginHorizontal: 15 }}>*
+          {/* <View style={{flex: 1, display: 'flex', flexDirection: 'column'}}>
             <View
               style={{
                 display: 'flex',
@@ -262,7 +263,10 @@ function App(): JSX.Element {
               </View>
             </View>
           </View>
-        </View>
+        </View> */}
+
+      <ImageHandler />
+
 
       </ScrollView>
     </SafeAreaView>
